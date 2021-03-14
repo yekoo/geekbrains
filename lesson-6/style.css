@@ -1,0 +1,139 @@
+body{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+/*  1, 2 */
+.chess{
+    display: flex;
+    flex-direction: column;
+    /* border: brown solid 3px; */
+    align-items: stretch;
+    width: 400px;
+    height: 400px;
+}
+.chess__row{
+    display: flex;
+    height: 12.5%;
+    justify-content: stretch;
+}
+.chess__row:nth-child(odd) > .chess__cell:nth-child(odd){
+    background: orange;
+}
+.chess__row:nth-child(even) > .chess__cell:nth-child(even){
+    background: orange;
+}
+.chess__row:nth-child(1) > .chess__cell, .chess__row:last-child > .chess__cell{
+    background: brown!important;
+}
+.chess__row > .chess__cell:nth-child(1), .chess__row > .chess__cell:last-child{
+    background: brown!important;
+}
+.chess__cell{
+    flex-grow: 1;
+    padding: 8px;
+    position: relative;
+    background: sienna;
+    flex-basis: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.chess__cell_rotated{
+    /* transform: rotate(0.5turn); */
+}
+.chess__cell label{
+    color: chocolate;
+}
+.chess__figure{
+    position: absolute;
+    top: 7px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 1.4rem;
+    color: black;
+    font-weight: bold;
+}
+.chess__figure_white{
+    color: white;
+}
+
+
+
+/* 3 */
+.shop{
+    padding-top:30px;
+    position: relative;
+}
+
+.product__item{
+    margin: 8px;
+    border:1px solid rgba(0,0,0,0);
+    display: flex;
+}
+
+.product__image-box{
+    width: 15vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+}
+.product__price{
+    background: #ddd;
+    padding: 4px;
+    display: inline-block;
+}
+.product__add-cart-btn{
+    background: #3a3;
+    color:white;
+    padding: 3px 5px;
+    border-radius: 4px;
+    cursor:pointer;
+}
+
+
+.cart__box summary{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    cursor: pointer;
+}
+.cart__box{
+    position: absolute;
+    top:0;
+    left: 0;
+    background: #ddd;
+    box-shadow: 1px 1px 5px rgba(0,0,0,.2);
+    width: 100%;
+    padding:4px;
+}
+.cart-item__photo img{
+    height: 48px;
+}
+.cart{
+    background: white;
+}
+.cart__item{
+    display: flex;
+    align-items: center;
+}
+.cart__item div{
+    text-align: center;
+}
+.cart__item .cart-item__photo{
+    width:15%;
+}
+.cart__item .cart-item__name{
+    width:50%;
+    text-align: left;
+}
+.cart__item .cart-item__price{
+    width:25%;
+    text-align: right;
+}
+.cart__item .cart-item__cross{
+    width:10%;
+    color: red;
+    text-align: center;
+}
