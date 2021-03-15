@@ -136,4 +136,16 @@ body{
     width:10%;
     color: red;
     text-align: center;
+    cursor:pointer;
+}
+.cart__item .cart-item__cross span{
+    background:#eee;
+    display: inline-block;
+    padding: 4px;
+    border-radius: 4px;
+    pointer-events: none;
+}
+.cart__item .cart-item__cross:hover span{
+    background:red;
+    color:white;
 }
