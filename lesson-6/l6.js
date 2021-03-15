@@ -1,16 +1,16 @@
 'use strict';
 
 var products = [
-    {name:"Кефир", price:"51",photo:"",size:"1л"},
-    {name:"Молоко", price:"53",photo:"https://irecommend.ru/sites/default/files/product-images/142450/0005136-228x228.png",size:"1л"},
-    {name:"Хлеб", price:"47",photo:"https://cdn-irec.r-99.com/sites/default/files/imagecache/300o/product-images/1036706/O55jfOA9ccu6QhlhkgNC1w.jpg",size:"батон"},
-    {name:"Мука", price:"160",photo:"https://cdn-irec.r-99.com/sites/default/files/imagecache/300o/product-images/91162/muka.jpg",size:"1 кг"},
-    {name:"Масло", price:"125",photo:"https://cdn-irec.r-99.com/sites/default/files/imagecache/300o/product-images/85567/iHlIkkLgZl7CiWiIbwYQ.jpg",size:"250г"}
+    {id:0, name:"Кефир", price:"51",photo:"",size:"1л"},
+    {id:1, name:"Молоко", price:"53",photo:"https://irecommend.ru/sites/default/files/product-images/142450/0005136-228x228.png",size:"1л"},
+    {id:2, name:"Хлеб", price:"47",photo:"https://cdn-irec.r-99.com/sites/default/files/imagecache/300o/product-images/1036706/O55jfOA9ccu6QhlhkgNC1w.jpg",size:"батон"},
+    {id:45, name:"Мука", price:"160",photo:"https://cdn-irec.r-99.com/sites/default/files/imagecache/300o/product-images/91162/muka.jpg",size:"1 кг"},
+    {id:50, name:"Масло", price:"125",photo:"https://cdn-irec.r-99.com/sites/default/files/imagecache/300o/product-images/85567/iHlIkkLgZl7CiWiIbwYQ.jpg",size:"250г"}
 ];
 var cartContents = [
-    {name:"Боржоми", price:"160",photo:"https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fecx.images-amazon.com%2Fimages%2FI%2F41Dvof8NV7L._SY300_.jpg",size:"0.5л"},
-    {name:"Ессентуки", price:"120",photo:"https://cdn-irec.r-99.com/sites/default/files/imagecache/300o/product-images/201142/VubgvNQ9DavNzhOWEAcPtQ.png",size:"1л"},
-    {name:"Нарзан", price:"80",photo:"https://cdn-irec.r-99.com/sites/default/files/imagecache/300o/product-images/14559/narzan.jpg",size:"0.5"},
+    {id:20, name:"Боржоми", price:"160",photo:"https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fecx.images-amazon.com%2Fimages%2FI%2F41Dvof8NV7L._SY300_.jpg",size:"0.5л"},
+    {id:30, name:"Ессентуки", price:"120",photo:"https://cdn-irec.r-99.com/sites/default/files/imagecache/300o/product-images/201142/VubgvNQ9DavNzhOWEAcPtQ.png",size:"1л"},
+    {id:40, name:"Нарзан", price:"80",photo:"https://cdn-irec.r-99.com/sites/default/files/imagecache/300o/product-images/14559/narzan.jpg",size:"0.5"},
 ];
 
 const cart = {
@@ -40,7 +40,7 @@ const cart = {
         for(let prod of productList){
             sum += +prod.price;
         }
-        cartTotal.innerText = `В корзине: ${cart.length} товаров на сумму ${sum} рублей`;
+        cartTotal.innerText = `В корзине: ${this.products.length} товаров на сумму ${sum} рублей`;
     },
 
     createCartItem(product){
@@ -56,15 +56,18 @@ const cart = {
         return item;
     },
     addProduct(product){
-
+        // this.products.push(product);
     },
     removeProduct(event){
         console.log("REMOVE "+event.target.parentNode);
         console.log("remove "+this.innerHTML);
     },
-    vanishCart(totalId){
+    vanishCart(){
+        let cartContent = document.getElementById("cartPopupContent");
+        cartContent.innerHTML = "";
         this.products = [];
-        this.getCartTotal(cart, totalId);
+        this.init();
+        this.getCartTotal(this.products);
     }
 }
 
@@ -78,7 +81,7 @@ const catalogue = {
         console.log("catalogue.addToCart:",this.addToCart);
     },
     setProductList(products){
-        this.products = products.slice(0);
+        this.products = products;
     },
     fillProductList(products){
         let prodListElm = document.getElementById("prodList");
@@ -105,7 +108,13 @@ const catalogue = {
             props.insertAdjacentHTML('beforeend', '<div>Еще осталось '+obj.storeCount+' шт</div>');
         
         props.insertAdjacentHTML('beforeend', '<div class="product__price">'+obj.price + " р</div>");
-        props.insertAdjacentHTML('beforeend', '<div class="product__add-cart-btn" onClick="this.addToCart();">Добавить в карзину</div>');
+        const addToCartBtn = document.createElement("div");
+        addToCartBtn.innerText = "Купить";
+        addToCartBtn.className = "product__add-cart-btn";
+        addToCartBtn.onclick = this.addToCart;
+        props.appendChild(addToCartBtn);
+        addToCartBtn.dataset.prodId = obj.id;
+        // props.insertAdjacentHTML('beforeend', '<div class="product__add-cart-btn" onClick="this.addToCart();">Добавить в карзину</div>');
         return item;
     },
 };
@@ -117,15 +126,25 @@ const shop = {
 
     init(cart, catalogue){
         this.cart = cart;
-        this.cart.setCartContents(products);
+        this.cart.setCartContents(cartContents);
         this.cart.init();
+        console.log("CART ELEMENT IN SHOP: "+this.cart);
         this.catalogue = catalogue;
         this.catalogue.addToCart = this.addToCart;
-        this.catalogue.setProductList(cartContents)
+        this.catalogue.setProductList(products)
         this.catalogue.init();
     },
     addToCart(e){
-        console.log(e);
+        console.log("cart:",this.cart);
+        let prodId = e.target.dataset.prodId;
+        console.log(prodId);
+        let prodObj = products.find((product) => product.id==prodId);
+        console.log("prodId:",prodId,"prodObj",prodObj);
+        cartContents.push(prodObj);
+        console.log(cart);
+        cart.vanishCart();
+        cart.setCartContents(cartContents);
+        cart.init();
     },
 
 }
