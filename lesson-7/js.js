@@ -5,7 +5,7 @@ const settings = {
   rowsCount: 21,
   colsCount: 21,
   speed: 2,
-  winFoodCount: 30,
+  winFoodCount: 50,
   startTail: 0,
 };
 
@@ -189,27 +189,6 @@ const food = {
   },
 };
 
-const stone = {
-  x: null,
-  y: null,
-
-  getCoordinates() {
-    return {
-      x: this.x,
-      y: this.y,
-    };
-  },
-
-  setCoordinates(point) {
-    this.x = point.x;
-    this.y = point.y;
-  },
-
-  isOnPoint(point) {
-    return this.x === point.x && this.y === point.y;
-  },
-};
-
 const stones = {
   points: [],
   clearPoints(){
@@ -266,7 +245,6 @@ const game = {
   tickInterval: null,
 
   counterElement:null,
-  stone,
   stones,
 
   init(userSettings) {
