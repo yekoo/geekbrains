@@ -349,7 +349,6 @@ const game = {
   },
 
   getRandomFreeCoordinates() {
-    console.log(this.food.getCoordinates, this.stones.getAllCoordinates, this.snake.getBody);
     const exclude = [this.food.getCoordinates(), ...this.stones.getAllCoordinates(), ...this.snake.getBody()];
     // without ... -  [{}, [{}, {}, {}]] => with ... [{}, {}, {}, {}];
     while (true) {
