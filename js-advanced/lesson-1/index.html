@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Интернет-магазин</title>
+
+    <style>
+        body{
+            padding:0;
+            margin:0;
+        }
+        header{
+            background-color: #ddd;
+            padding: 8px;
+            position: sticky;
+            position: -webkit-sticky;
+        }
+        .btn-cart{
+            background: #1099d3;
+            color: white;
+            padding: 6px;
+            border: 0;
+        }
+        .btn-cart:hover{
+            background: #007abb;
+        }
+
+        .products{
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        .product-item h3{
+            margin:4px 0;
+        }
+        .product-item{
+            width: 300px;
+            border: 1px solid #ccc;
+            background-color: #eee;
+            border-radius: 16px;
+            padding: 10px;
+            margin: 4px;
+        }
+        .product-price{
+            font-size: 120%;
+            font-weight: bold;
+            color: darkgoldenrod;
+        }
+
+        
+    </style>
+</head>
+<body>
+<header>
+    <button class="btn-cart" type="button">Корзина</button>
+</header>
+<main>
+    <div class="products"></div>
+</main>
+  
+  
+<!-- <script src="./js/main.js"></script> -->
+<script>
+    'use strict';
+    const products = [
+        {id: 1, title: 'Notebook', price: 20000},
+        {id: 2, title: 'Mouse', price: 1500},
+        {id: 3, title: 'Keyboard', price: 5000},
+        {id: 4, title: 'Gamepad', price: 4500},
+        {},
+    ];
+
+    const renderProduct = ({title="noname", price=0}) => {
+        return `<div class="product-item">
+                    <h3>${title}</h3>
+                    <p class="product-price">${price}</p>
+                    <button class="by-btn">Добавить в корзину</button>
+                </div>`;
+    }
+
+    const renderProducts = (list) => {
+        const productListHTML = list.map( (item) => renderProduct(item) );
+        document.querySelector('.products').innerHTML = productListHTML.join("");  //  <hr/>
+    }
+
+    renderProducts(products);
+
+</script>
+</body>
+</html>
