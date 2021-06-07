@@ -1,1 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <script type="module" src="./js/sectionSwitcher.js"></script>
+    <script type="module" src="./js/form.js"></script>
+    <script type="module" src="./js/timer.js"></script>
+    <!-- <script type="module" src="file:///Users/yekoo/Documents/GeekBrains/GIT/JS-Modules/01/task/js/form.js"></script> -->
+    <!-- <script src="./js/form.js"></script> -->
+    
+    <title>Task 1</title>
 
+    <style>
+        header{
+            position: sticky;
+            position: -webkit-sticky; 
+            display: block;
+            top:0;
+            text-align: right;
+            /* background: #f8f8f8; */
+        }
+        section{
+            height: 70vh;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <p>http://geekbrains:8888/01/task/</p>
+    <header>
+    </header>
+
+    <section id="dateDiff">
+        <form id="dateForm">
+            <h4>Date difference</h4>
+            <label>
+                Дата 1:
+                <input type="date" id="date1" name="date1">
+            </label>
+            <label for="date2">
+                Дата 2:
+                <input type="date" id="date2" name="date2">
+            </label>
+            <button type="submit">Рассчитать промежуток</button>
+            <div class="message"></div>
+        </form>
+    </section>
+    
+    <hr>
+
+    <section id="timer">
+        <h4>Timer</h4>
+         <input type="time" name="timer" id="timer-time" value="00:05:00" step="1">
+         <br>
+         <button id="timer-start">Start</button>
+         <button id="timer-stop">Stop</button>
+    </section>
+
+    <hr>
+
+    <section id="stepwatch">
+        <h4>Step watch</h4>
+        <input type="time" name="timer" id="stopwatch-time" value="00:00:00" step="1">
+        <button id="stopwatch-start-stop">Start</button>
+        <button id="stopwatch-pause">Pause</button>
+    </section>
+
+</body>
+</html>
