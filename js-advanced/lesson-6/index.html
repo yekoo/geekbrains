@@ -1,1 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Интернет-магазин</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h1>ИНТЕРНЕТ-МАГАЗИН</h1>
+            <div class="header-controls">
+                <form action="#" class="search-form" @submit.prevent="filter">
+                    <input type="text" class="search-field" v-model="searchLine">
+                    <button class="btn-search" type="submit">
+                        🔎
+                    </button>
+                </form>
 
+                <button class="btn-cart" type="button" @click="showCart = !showCart">Корзина</button>
+            </div>
+            <cart :cart-items="cartItems" :img="imgCart" :visibility="showCart" @remove="remove"></cart>
+        </header>
+        <main>
+            <!-- <products ref="products"></products> -->
+            <!-- <products :products="filtered" :img="imgCatalog" @add-product="addProduct"></products> -->
+            <div class="products">
+                <div class="product-item" v-for="product of filtered" :key="product.id_product">
+                    <img :src="imgCatalog" alt="Some img">
+                    <div class="desc">
+                        <h3>{{product.product_name}}</h3>
+                        <p>{{product.price}}₽</p>
+                        <button class="buy-btn" @click="addProduct(product)">Купить</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="js/CartComp.js"></script>
+    <script src="js/ProductComp.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
